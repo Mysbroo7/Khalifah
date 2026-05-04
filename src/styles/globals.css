@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --void: #020205;
+  --ember: #ff3b00;
+  --plasma: #00f5d4;
+  --ghost: #f0eee8;
+  --dim: #3a3a4a;
+
+  --cursor-size: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--void);
+  color: var(--ghost);
+  font-family: var(--font-body);
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* Hide default cursor everywhere */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ember);
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--ember);
+  color: var(--ghost);
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+/* Typography */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Gradient text */
+.text-gradient-ember {
+  background: linear-gradient(135deg, var(--ember), #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-plasma {
+  background: linear-gradient(135deg, var(--plasma), #0099ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow utilities */
+.glow-ember {
+  box-shadow: 0 0 30px rgba(255, 59, 0, 0.4), 0 0 60px rgba(255, 59, 0, 0.2);
+}
+.glow-plasma {
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.4), 0 0 60px rgba(0, 245, 212, 0.2);
+}
+.text-glow-ember {
+  text-shadow: 0 0 20px rgba(255, 59, 0, 0.6), 0 0 40px rgba(255, 59, 0, 0.3);
+}
+
+/* Line reveal animation */
+.line-reveal {
+  overflow: hidden;
+}
+.line-reveal span {
+  display: block;
+}
+
+/* Section padding */
+.section-pad {
+  padding: 120px 0;
+}
+
+/* Container */
+.container-custom {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .container-custom {
+    padding: 0 24px;
+  }
+  .section-pad {
+    padding: 80px 0;
+  }
+}
+
+/* Magnetic button */
+.magnetic {
+  position: relative;
+  display: inline-block;
+}
+
+/* 3D Perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+/* Loading screen */
+.loader-bar {
+  background: linear-gradient(90deg, var(--ember), var(--plasma));
+}
+
+/* Grid lines background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(240, 238, 232, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 238, 232, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Blend mode text */
+.blend-screen {
+  mix-blend-mode: screen;
+}
+.blend-overlay {
+  mix-blend-mode: overlay;
+}
+
+/* Clip path reveals */
+@keyframes clipReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+/* Underline hover */
+.hover-underline {
+  position: relative;
+}
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--ember);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
